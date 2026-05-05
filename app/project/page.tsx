@@ -53,7 +53,7 @@ const projects = [
     title: "My Portfolio",
     description: "My personal software developer portfolio (this exact website!). Featuring high-performance animations, responsive dynamic design, and modern features.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Web3Forms API"],
-    link: "portfolio-chinmaya-swain.vercel.app",
+    link: "https://portfolio-chinmaya-swain.vercel.app/",
     github: "https://github.com/chinmaya-swain599?tab=repositories",
     color: "from-purple-500/20 to-indigo-500/20",
     border: "group-hover:border-purple-500/50"
