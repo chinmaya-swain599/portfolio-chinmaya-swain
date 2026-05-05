@@ -1,10 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
+
 
 export default function Journey() {
-  const [selectedJourney, setSelectedJourney] = useState<any>(null);
+  type JourneyItem = {
+    id: number;
+    title: string;
+    company: string;
+    period: string;
+    description: string;
+    details: string;
+    skills: string[];
+    achievements: string[];
+  };
+  const [selectedJourney, setSelectedJourney] = useState<JourneyItem | null>(null);
 
   const journeys = [
   {
@@ -61,7 +71,7 @@ export default function Journey() {
 
         {/* Subheader */}
         <p className="max-w-3xl mx-auto text-gray-600 dark:text-gray-400 text-base md:text-xl font-medium leading-relaxed mb-10 md:mb-12 px-2">
-          Here's a timeline of my journey through development roles, freelance work, and internships — 
+          Here&apos;s a timeline of my journey through development roles, freelance work, and internships — 
           each step sharpening my technical and problem-solving skills.
         </p>
 
