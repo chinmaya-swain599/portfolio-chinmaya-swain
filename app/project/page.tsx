@@ -32,11 +32,11 @@ const projects = [
     border: "group-hover:border-emerald-500/50"
   },
   {
-    title: "Khubsurat (Upcoming)", 
+    title: "Khubsurat", 
     description: "A beautiful, modern web interface focused on premium UI/UX design. Styled completely with Tailwind's utility-first framework.",
     tech: ["React", "Tailwind CSS","Web3Forms API", "Node.js"],
-    link: "#",
-    github: "https://github.com/chinmaya-swain599?tab=repositories",
+    link: "https://khubsurat-rose.vercel.app",
+    github: "https://github.com/chinmaya-swain599/khubsurat",
     color: "from-pink-500/20 to-rose-500/20",
     border: "group-hover:border-pink-500/50"
   },
