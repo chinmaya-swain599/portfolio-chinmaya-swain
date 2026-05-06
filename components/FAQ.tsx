@@ -36,27 +36,27 @@ export default function FAQ() {
       </div>
 
       {/* 🕺 Left Dancing Card — Absolutely positioned beside accordion */}
-      <div className="absolute left-2 xl:left-8 top-[55%] -translate-y-1/2 hidden xl:block animate-bounce z-10"
+      <div className="absolute left-1 sm:left-4 xl:left-8 top-[20%] xl:top-[55%] -translate-y-1/2 animate-bounce z-10"
         style={{ animationDuration: "2000ms" }}>
-        <div className="w-[160px] h-[160px] bg-gray-100 dark:bg-gray-950 rounded-2xl border-2 border-gray-200 dark:border-white/10 overflow-hidden rotate-[-12deg] shadow-2xl p-2">
-          <div className="w-full h-full rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-900">
+        <div className="w-14 h-14 sm:w-24 sm:h-24 xl:w-[160px] xl:h-[160px] bg-gray-100 dark:bg-gray-950 rounded-xl xl:rounded-2xl border-2 border-gray-200 dark:border-white/10 overflow-hidden rotate-[-12deg] shadow-xl xl:shadow-2xl p-1 xl:p-2">
+          <div className="w-full h-full rounded-lg xl:rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-900">
             <img src="/project1.png" className="w-full h-full object-cover" alt="side-left" />
           </div>
         </div>
       </div>
 
       {/* 🕺 Right Dancing Card — Absolutely positioned beside accordion */}
-      <div className="absolute right-2 xl:right-8 top-[65%] -translate-y-1/2 hidden xl:block animate-bounce z-10"
+      <div className="absolute right-1 sm:right-4 xl:right-8 top-[80%] xl:top-[65%] -translate-y-1/2 animate-bounce z-10"
         style={{ animationDuration: "2200ms", animationDelay: "200ms" }}>
-        <div className="w-[160px] h-[160px] bg-gray-100 dark:bg-gray-950 rounded-2xl border-2 border-gray-200 dark:border-white/10 overflow-hidden rotate-[12deg] shadow-2xl p-2">
-          <div className="w-full h-full rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-900">
+        <div className="w-14 h-14 sm:w-24 sm:h-24 xl:w-[160px] xl:h-[160px] bg-gray-100 dark:bg-gray-950 rounded-xl xl:rounded-2xl border-2 border-gray-200 dark:border-white/10 overflow-hidden rotate-[12deg] shadow-xl xl:shadow-2xl p-1 xl:p-2">
+          <div className="w-full h-full rounded-lg xl:rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-900">
             <img src="/project2.png" className="w-full h-full object-cover" alt="side-right" />
           </div>
         </div>
       </div>
 
       {/* Center Content */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-3xl mx-auto px-16 sm:px-32 md:px-36 xl:px-6 relative z-10">
 
         {/* Header */}
         <div className="text-center space-y-2 sm:space-y-4 mb-8 sm:mb-12 relative">

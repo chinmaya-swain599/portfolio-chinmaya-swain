@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
 function SkillTrailStep({ icon: Icon, title, skills, level, side, isLast }: any) {
   return (
     <div className={cn(
-      "relative flex flex-col md:flex-row items-center w-full mb-12 md:mb-16",
-      side === 'right' ? "md:flex-row-reverse" : ""
+      "relative flex flex-row items-center w-full mb-12 md:mb-16",
+      side === 'right' ? "flex-row-reverse" : ""
     )}>
       {/* The Central Path Segment */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[calc(100%+4rem)] w-1 hidden md:block">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[calc(100%+4rem)] w-1 block">
          {!isLast && (
            <div className="w-full h-full border-l-2 border-dashed border-black/10 dark:border-white/10 relative">
               <div className="absolute top-1/4 left-1/2 -translate-x-1/2 animate-[float_4s_infinite]">
@@ -27,30 +27,30 @@ function SkillTrailStep({ icon: Icon, title, skills, level, side, isLast }: any)
          )}
       </div>
 
-      <div className={cn("w-full md:w-[45%] flex px-4 md:px-0", side === 'left' ? "md:justify-end md:text-right" : "md:justify-start md:text-left")}>
-        <div className="group relative p-8 md:p-10 rounded-[2.5rem] bg-white dark:bg-white/[0.02] border border-black/5 dark:border-white/10 transition-all duration-700 w-full max-w-lg">
-           <div className={cn("absolute -top-3 px-3 py-1 rounded-full bg-black dark:bg-white text-[10px] font-black uppercase text-white dark:text-black tracking-widest", side === 'left' ? "md:right-8" : "md:left-8")}>
+      <div className={cn("w-[45%] flex px-1 sm:px-4", side === 'left' ? "justify-end text-right" : "justify-start text-left")}>
+        <div className="group relative p-4 sm:p-6 md:p-10 rounded-[1.5rem] sm:rounded-[2.5rem] bg-white dark:bg-white/[0.02] border border-black/5 dark:border-white/10 transition-all duration-700 w-full max-w-lg">
+           <div className={cn("absolute -top-3 px-2 sm:px-3 py-1 rounded-full bg-black dark:bg-white text-[8px] sm:text-[10px] font-black uppercase text-white dark:text-black tracking-widest", side === 'left' ? "right-4 sm:right-8" : "left-4 sm:left-8")}>
              Lvl {level/10}
            </div>
-           <h3 className="text-2xl md:text-4xl font-black text-black dark:text-white mb-4 tracking-tighter">{title}</h3>
-           <div className={cn("flex flex-wrap gap-2", side === 'left' ? "md:justify-end" : "md:justify-start")}>
+           <h3 className="text-base sm:text-2xl md:text-4xl font-black text-black dark:text-white mb-2 sm:mb-4 tracking-tighter">{title}</h3>
+           <div className={cn("flex flex-wrap gap-1 sm:gap-2", side === 'left' ? "justify-end" : "justify-start")}>
              {skills.map((s: string, i: number) => (
-               <span key={i} className="px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/5 text-[10px] md:text-[11px] font-bold text-black/60 dark:text-white/60 uppercase tracking-wider">{s}</span>
+               <span key={i} className="px-1.5 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-black/5 dark:bg-white/5 text-[8px] sm:text-[11px] font-bold text-black/60 dark:text-white/60 uppercase tracking-wider">{s}</span>
              ))}
            </div>
         </div>
       </div>
 
-      <div className="relative z-10 my-8 md:my-0 mx-auto md:mx-0 w-20 h-20 rounded-full bg-white dark:bg-[#0a0a0a] border-4 border-white dark:border-[#0a0a0a] flex items-center justify-center group">
-         <Icon className="w-8 h-8 text-black dark:text-white relative z-10 group-hover:scale-110 transition-transform duration-500" />
+      <div className="relative z-10 mx-auto w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 shrink-0 rounded-full bg-white dark:bg-[#0a0a0a] border-4 border-white dark:border-[#0a0a0a] flex items-center justify-center group">
+         <Icon className="w-5 h-5 sm:w-8 sm:h-8 text-black dark:text-white relative z-10 group-hover:scale-110 transition-transform duration-500" />
       </div>
-      <div className="hidden md:block w-[45%]" />
+      <div className="block w-[45%]" />
     </div>
   );
 }
 
 function TechMarquee() {
-  const tech = ["REACT", "NEXT.JS", "TYPESCRIPT", "NODE.JS", "PRISMA", "TAILWIND", "AWS", "DOCKER", "FIGMA", "PYTHON", "RUST", "GOLANG"];
+  const tech = ["REACT", "NEXT.JS", "TYPESCRIPT", "NODE.JS", "PRISMA", "TAILWIND", "AWS", "DOCKER", "FIGMA", "PYTHON","PRISMA","MYSQL","POSTGRESQL","RAILWAY","VERCEL","MONGODB"];
   return (
     <div className="w-full overflow-hidden py-10 mb-10 group">
       <div className="flex w-max whitespace-nowrap animate-[marquee_30s_linear_infinite] group-hover:[animation-play-state:paused]">

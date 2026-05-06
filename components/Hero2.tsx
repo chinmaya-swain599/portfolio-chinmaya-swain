@@ -1,9 +1,34 @@
 "use client";
 
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 export default function Hero2() {
+  const [visibleItems, setVisibleItems] = useState({ card1: false, card2: false, card3: false });
+  const card1Ref = useRef<HTMLDivElement>(null);
+  const card2Ref = useRef<HTMLDivElement>(null);
+  const card3Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("data-id");
+            if (id) {
+              setVisibleItems((prev) => ({ ...prev, [id]: true }));
+              observer.unobserve(entry.target);
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    if (card1Ref.current) observer.observe(card1Ref.current);
+    if (card2Ref.current) observer.observe(card2Ref.current);
+    if (card3Ref.current) observer.observe(card3Ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -22,13 +47,13 @@ export default function Hero2() {
           </div>
 
           {/* Main Statement */}
-          <div className="space-y-6 md:space-y-10">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tighter max-w-4xl mx-auto">
-              I’m a <span className="text-blue-600 dark:text-blue-400 italic">Software Developer</span> who enjoys building simple, efficient, and user-friendly web applications.
+          <div className="space-y-6 md:space-y-8 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.15] tracking-tight text-gray-900 dark:text-white max-w-4xl mx-auto">
+              I’m a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500 dark:from-blue-400 dark:to-teal-400">Software Developer</span> who enjoys building simple, efficient, and user-friendly web applications.
             </h2>
             
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed tracking-tight text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              My journey started with curiosity about how systems work, which grew into a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500 font-bold">passion for development</span>. I continuously learn new technologies and improve my skills through real-world projects.
+            <p className="text-base sm:text-lg md:text-xl font-medium leading-relaxed text-gray-500 dark:text-gray-400 max-w-3xl mx-auto">
+              My journey started with curiosity about how systems work, which grew into a <span className="text-gray-800 dark:text-gray-200 font-semibold">passion for development</span>. I continuously learn new technologies and improve my skills through real-world projects.
             </p>
           </div>
 
@@ -46,7 +71,7 @@ export default function Hero2() {
       </section>
 
       {/* 🔥 THE PROJECT SECTION - RESTORED EXACTLY AS IT WAS */}
-      <section className="relative py-8 md:py-12 px-4 md:px-6 bg-blue-50/30 dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300">
+      <section className="relative py-8 md:py-12 px-4 md:px-6 bg-blue-50/30 dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300 overflow-hidden">
 
         {/* Subtle Section Decor */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/10 blur-3xl rounded-full"></div>
@@ -59,7 +84,7 @@ export default function Hero2() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
 
           {/* CARD 1 */}
-          <div className="text-center">
+          <div ref={card1Ref} data-id="card1" className={`text-center transition-all duration-1000 transform ${visibleItems.card1 ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"}`}>
             <div className="flex items-center justify-center h-48 md:h-60 w-full mb-6">
               <img src="/project1.png" className="max-h-full max-w-full object-contain hover:scale-110 transition cursor-pointer dark:invert-0 invert" alt="DevTracker" />
             </div>
@@ -73,7 +98,7 @@ export default function Hero2() {
           </div>
 
           {/* CARD 2 */}
-          <div className="text-center">
+          <div ref={card2Ref} data-id="card2" className={`text-center transition-all duration-1000 md:delay-[200ms] transform ${visibleItems.card2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`}>
             <div className="flex items-center justify-center h-48 md:h-60 w-full mb-6">
               <img src="/project2.png" className="max-h-full max-w-full object-contain hover:scale-110 transition cursor-pointer dark:invert-0 invert" alt="CodeShare" />
             </div>
@@ -87,7 +112,7 @@ export default function Hero2() {
           </div>
 
           {/* CARD 3 */}
-          <div className="text-center">
+          <div ref={card3Ref} data-id="card3" className={`text-center transition-all duration-1000 md:delay-[400ms] transform ${visibleItems.card3 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-20"}`}>
             <div className="flex items-center justify-center h-48 md:h-60 w-full mb-6">
               <img src="/project3.png" className="max-h-full max-w-full object-contain hover:scale-110 transition cursor-pointer dark:invert-0 invert" alt="EcoCart" />
             </div>

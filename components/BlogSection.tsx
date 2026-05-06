@@ -41,6 +41,9 @@ export default function BlogSection() {
 
   const lastTimeRef = useRef<number>(Date.now());
   const requestRef = useRef<number | null>(null);
+  
+  const touchStartRef = useRef(0);
+  const touchEndRef = useRef(0);
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % BLOG_POSTS.length);
@@ -84,6 +87,25 @@ export default function BlogSection() {
     setActiveIndex(index);
     setProgress(0);
     lastTimeRef.current = Date.now();
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true);
+    touchStartRef.current = e.targetTouches[0].clientX;
+  };
+  
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndRef.current = e.targetTouches[0].clientX;
+  };
+  
+  const handleTouchEnd = () => {
+    setIsPaused(false);
+    if (!touchStartRef.current || !touchEndRef.current) return;
+    const distance = touchStartRef.current - touchEndRef.current;
+    if (distance > 50) handleNext();
+    if (distance < -50) handlePrev();
+    touchStartRef.current = 0;
+    touchEndRef.current = 0;
   };
 
   return (
@@ -151,8 +173,13 @@ export default function BlogSection() {
             ))}
           </div>
 
-          <div className="relative group/carousel">
-            <div className="relative h-[350px] sm:h-[400px] md:h-[450px] lg:h-[480px] overflow-hidden rounded-[1.5rem] md:rounded-[3.5rem] border border-gray-100 dark:border-white/5">
+          <div 
+            className="relative group/carousel touch-pan-y"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className="relative h-[420px] sm:h-[400px] md:h-[450px] lg:h-[480px] overflow-hidden rounded-[1.5rem] md:rounded-[3.5rem] border border-gray-100 dark:border-white/5">
               <div
                 className="absolute inset-0 flex transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
                 style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -174,41 +201,41 @@ export default function BlogSection() {
                     </div>
 
                     {/* Content Overlay */}
-                    <div className="relative z-10 w-full h-full flex flex-col items-start justify-end md:justify-center p-6 md:p-16">
+                    <div className="relative z-10 w-full h-full flex flex-col items-start justify-end md:justify-center p-3 sm:p-6 md:p-16">
                       
                       {/* Info Card - Glassmorphism */}
                       <div className={cn(
-                        "w-full md:max-w-xl lg:max-w-2xl backdrop-blur-xl bg-white/10 dark:bg-black/20 p-6 md:p-10 rounded-[1.5rem] md:rounded-[3rem] border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.5)] transition-all duration-1000 delay-100",
+                        "w-full md:max-w-xl lg:max-w-2xl backdrop-blur-xl bg-white/10 dark:bg-black/20 p-5 sm:p-6 md:p-10 rounded-[1.5rem] md:rounded-[3rem] border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.5)] transition-all duration-1000 delay-100",
                         activeIndex === index ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
                       )}>
-                        <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold tracking-widest mb-4 border border-blue-500/30">
+                        <div className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold tracking-widest mb-3 md:mb-4 border border-blue-500/30">
                           FEATURED POST
                         </div>
-                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 text-white leading-[1.15] drop-shadow-lg">
+                        <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black mb-3 md:mb-6 text-white leading-[1.15] drop-shadow-lg">
                           {post.title}
                         </h2>
 
-                        <p className="hidden sm:block text-white/80 text-sm md:text-base lg:text-lg mb-8 leading-relaxed font-medium line-clamp-3">
+                        <p className="hidden sm:block text-white/80 text-sm md:text-base lg:text-lg mb-6 md:mb-8 leading-relaxed font-medium line-clamp-3">
                           {post.description}
                         </p>
 
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-6 border-t border-white/10">
-                          <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/5">
-                              <Calendar size={20} className="md:w-6 md:h-6" />
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 pt-4 sm:pt-6 border-t border-white/10">
+                          <div className="flex items-center gap-3 md:gap-4">
+                            <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/5 shrink-0">
+                              <Calendar size={18} className="md:w-6 md:h-6" />
                             </div>
                             <div>
-                              <p className="text-[10px] text-white/50 font-black uppercase tracking-widest mb-1">DATE POSTED</p>
-                              <p className="text-sm md:text-base font-bold text-white">{post.date}</p>
+                              <p className="text-[9px] md:text-[10px] text-white/50 font-black uppercase tracking-widest mb-0.5 md:mb-1">DATE POSTED</p>
+                              <p className="text-xs sm:text-sm md:text-base font-bold text-white">{post.date}</p>
                             </div>
                           </div>
 
                           <div 
                             onClick={() => setSelectedPost(post)}
-                            className="group/btn flex items-center gap-3 cursor-pointer bg-white/10 hover:bg-white text-white hover:text-black transition-all duration-300 px-6 py-3.5 rounded-full border border-white/20 hover:border-white shadow-lg"
+                            className="group/btn w-full sm:w-auto flex items-center justify-center gap-2 sm:gap-3 cursor-pointer bg-white/10 hover:bg-white text-white hover:text-black transition-all duration-300 px-4 md:px-6 py-2.5 md:py-3.5 rounded-full border border-white/20 hover:border-white shadow-lg"
                           >
-                            <span className="text-xs font-bold tracking-[0.2em] transition-colors">READ MORE</span>
-                            <ExternalLink size={18} className="group-hover/btn:rotate-45 transition-transform duration-300" />
+                            <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] transition-colors">READ MORE</span>
+                            <ExternalLink size={16} className="md:w-[18px] md:h-[18px] group-hover/btn:rotate-45 transition-transform duration-300" />
                           </div>
                         </div>
                       </div>
@@ -220,15 +247,15 @@ export default function BlogSection() {
               {/* Navigation Arrows */}
               <button
                 onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                className="absolute left-6 top-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 hidden md:flex items-center justify-center text-white opacity-0 group-hover/carousel:opacity-100 transition-all hover:bg-white hover:text-black z-30 shadow-2xl"
+                className="absolute left-2 sm:left-4 md:left-6 top-[30%] md:top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white opacity-100 md:opacity-0 group-hover/carousel:opacity-100 transition-all hover:bg-white hover:text-black z-30 shadow-2xl"
               >
-                <ChevronLeft size={32} />
+                <ChevronLeft className="w-5 h-5 md:w-8 md:h-8" />
               </button>
               <button
                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                className="absolute right-6 top-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 hidden md:flex items-center justify-center text-white opacity-0 group-hover/carousel:opacity-100 transition-all hover:bg-white hover:text-black z-30 shadow-2xl"
+                className="absolute right-2 sm:right-4 md:right-6 top-[30%] md:top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white opacity-100 md:opacity-0 group-hover/carousel:opacity-100 transition-all hover:bg-white hover:text-black z-30 shadow-2xl"
               >
-                <ChevronRight size={32} />
+                <ChevronRight className="w-5 h-5 md:w-8 md:h-8" />
               </button>
             </div>
           </div>

@@ -37,9 +37,9 @@ export default function Footer() {
     {
       title: "Social",
       links: [
-        { name: "LinkedIn", href: "https://www.linkedin.com/in/chinmaya-swain599/" },
+        { name: "LinkedIn", href: "https://www.linkedin.com/in/chinmaya-swain-75a81a292" },
         { name: "GitHub", href: "https://github.com/chinmaya-swain599?tab=repositories" },
-        { name: "Twitter / X", href: "https://x.com/chinmaya_swain" },
+        { name: "Twitter / X", href: "https://x.com/I_m_Chinmaya599" },
         { name: "Facebook", href: "https://www.facebook.com/share/1CdCpUwRWV/" },
         { name: "Instagram", href: "https://www.instagram.com/sky_arc09?igsh=Mzl1bGxuMDZjOGV6" },
       ],
@@ -95,8 +95,8 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4">
             {[
               { icon: <FaGithub />, link: "https://github.com/chinmaya-swain599?tab=repositories" },
-              { icon: <FaLinkedinIn />, link: "https://www.linkedin.com/in/chinmaya-swain599/" },
-              { icon: <FaXTwitter />, link: "https://x.com/chinmaya_swain" },
+              { icon: <FaLinkedinIn />, link: "https://www.linkedin.com/in/chinmaya-swain-75a81a292" },
+              { icon: <FaXTwitter />, link: "https://x.com/I_m_Chinmaya599" },
               { icon: <FaFacebookF />, link: "https://www.facebook.com/share/1CdCpUwRWV/" },
               { icon: <FaInstagram />, link: "https://www.instagram.com/sky_arc09?igsh=Mzl1bGxuMDZjOGV6" }
             ].map((social, i) => (

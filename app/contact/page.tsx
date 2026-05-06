@@ -62,7 +62,7 @@ export default function ContactPage() {
           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
       </div>
 
-      <div id="contact-form" className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-24 scroll-mt-32">
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-24">
         
         {/* Left Side: Text and Information */}
         <div className="flex-1 space-y-10">
@@ -148,7 +148,7 @@ export default function ContactPage() {
         </div>
 
         {/* Right Side: Form */}
-        <div className="flex-1">
+        <div id="contact-form" className="flex-1 scroll-mt-24 md:scroll-mt-32">
           <div className="bg-purple-100/90 dark:bg-purple-900/20 backdrop-blur-3xl p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-[2.5rem] border-2 border-purple-300 dark:border-purple-500/30 shadow-[0_0_60px_rgba(168,85,247,0.3)] dark:shadow-[0_0_40px_rgba(168,85,247,0.2)] group relative transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_80px_rgba(168,85,247,0.4)]">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-indigo-400/10 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
